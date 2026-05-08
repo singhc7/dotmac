@@ -24,6 +24,7 @@ brew "tmux"
 # Git
 brew "git"
 brew "pre-commit"
+brew "gh"
 
 # Downloads & Media
 brew "aria2"
