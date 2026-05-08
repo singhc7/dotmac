@@ -20,7 +20,7 @@ Before deploying, ensure the following are installed on your system:
 
 1. **Clone the repository** into your home directory:
 
-        git clone https://github.com/singhc7/.mac.git ~/.dotfiles
+        git clone https://github.com/singhc7/dotmac.git ~/.dotfiles
         cd ~/.dotfiles
 
 2. **Run the bootstrap script** to install all dependencies and deploy configs:
