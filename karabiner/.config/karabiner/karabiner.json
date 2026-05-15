@@ -2,21 +2,15 @@
     "profiles": [
         {
             "name": "Default profile",
-            "selected": false,
             "virtual_hid_keyboard": {
                 "keyboard_type_v2": "ansi"
             }
         },
         {
-            "name": "chahat",
-            "selected": true,
-            "virtual_hid_keyboard": {
-                "keyboard_type_v2": "ansi"
-            },
             "complex_modifications": {
                 "parameters": {
-                    "basic.to_if_alone_timeout_milliseconds": 200,
                     "basic.simultaneous_threshold_milliseconds": 80,
+                    "basic.to_if_alone_timeout_milliseconds": 200,
                     "basic.to_if_held_down_threshold_milliseconds": 350
                 },
                 "rules": [
@@ -24,10 +18,13 @@
                         "description": "[Hyper] Caps Lock → Escape (tap) / Hyper ⇧⌃⌥⌘ (hold). Frees Caps for a dedicated power-user modifier; Esc when tapped alone keeps vim/readline happy.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
@@ -39,7 +36,12 @@
                                         ]
                                     }
                                 ],
-                                "to_if_alone": [{ "key_code": "escape" }]
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -47,7 +49,6 @@
                         "description": "[Nav] Hyper + hjkl → ← ↓ ↑ →. Vim-style arrows everywhere (Finder, browsers, GUI apps that ignore terminal vim modes).",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": {
@@ -59,10 +60,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "left_arrow" }]
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "j",
                                     "modifiers": {
@@ -74,10 +79,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "down_arrow" }]
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "k",
                                     "modifiers": {
@@ -89,10 +98,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "up_arrow" }]
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "l",
                                     "modifiers": {
@@ -104,7 +117,12 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "right_arrow" }]
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -112,7 +130,6 @@
                         "description": "[Nav] Hyper + u/i/o/p → Home / PageDown / PageUp / End. Long-distance nav without reaching for the arrow cluster.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "u",
                                     "modifiers": {
@@ -124,10 +141,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "home" }]
+                                "to": [
+                                    {
+                                        "key_code": "home"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "i",
                                     "modifiers": {
@@ -139,10 +160,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "page_down" }]
+                                "to": [
+                                    {
+                                        "key_code": "page_down"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "o",
                                     "modifiers": {
@@ -154,10 +179,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "page_up" }]
+                                "to": [
+                                    {
+                                        "key_code": "page_up"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "p",
                                     "modifiers": {
@@ -169,7 +198,12 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "end" }]
+                                "to": [
+                                    {
+                                        "key_code": "end"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -177,7 +211,6 @@
                         "description": "[Edit] Hyper + ⌫ → Forward delete. MacBooks lack a real Del key.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
@@ -189,7 +222,12 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "key_code": "delete_forward" }]
+                                "to": [
+                                    {
+                                        "key_code": "delete_forward"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -197,7 +235,6 @@
                         "description": "[Media] Hyper + , / . / / → Volume Down / Up / Mute. Keeps the top function row free.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "comma",
                                     "modifiers": {
@@ -209,10 +246,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "consumer_key_code": "volume_decrement" }]
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_decrement"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "period",
                                     "modifiers": {
@@ -224,10 +265,14 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "consumer_key_code": "volume_increment" }]
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_increment"
+                                    }
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "slash",
                                     "modifiers": {
@@ -239,7 +284,12 @@
                                         ]
                                     }
                                 },
-                                "to": [{ "consumer_key_code": "mute" }]
+                                "to": [
+                                    {
+                                        "consumer_key_code": "mute"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -247,17 +297,26 @@
                         "description": "[Mod] Right ⌘ → Return (tap) / ⌘ (hold). One-handed enter without leaving the home row.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "right_command",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
                                 "to": [
-                                    { "key_code": "right_command", "lazy": true }
+                                    {
+                                        "key_code": "right_command",
+                                        "lazy": true
+                                    }
                                 ],
                                 "to_if_alone": [
-                                    { "key_code": "return_or_enter" }
-                                ]
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -265,15 +324,27 @@
                         "description": "[Mod] Left ⇧ + Right ⇧ → Caps Lock toggle. Reclaims the lost Caps Lock for the rare moment you actually want it.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    },
                                     "simultaneous": [
-                                        { "key_code": "left_shift" },
-                                        { "key_code": "right_shift" }
-                                    ],
-                                    "modifiers": { "optional": ["caps_lock"] }
+                                        {
+                                            "key_code": "left_shift"
+                                        },
+                                        {
+                                            "key_code": "right_shift"
+                                        }
+                                    ]
                                 },
-                                "to": [{ "key_code": "caps_lock" }]
+                                "to": [
+                                    {
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -281,27 +352,38 @@
                         "description": "[Safety] Hold ⌘Q to quit (350ms). A quick ⌘Q is swallowed so a slipped finger near ⌘W never nukes your work.",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": {
-                                        "mandatory": ["left_command"],
-                                        "optional": ["caps_lock"]
+                                        "mandatory": [
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
                                     }
+                                },
+                                "parameters": {
+                                    "basic.to_if_held_down_threshold_milliseconds": 350
                                 },
                                 "to_if_held_down": [
                                     {
                                         "key_code": "q",
-                                        "modifiers": ["left_command"]
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
-                                "parameters": {
-                                    "basic.to_if_held_down_threshold_milliseconds": 350
-                                }
+                                "type": "basic"
                             }
                         ]
                     }
                 ]
+            },
+            "name": "chahat",
+            "selected": true,
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "ansi"
             }
         }
     ]
