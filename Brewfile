@@ -39,3 +39,6 @@ brew "borgbackup"
 brew "yamllint"
 brew "direnv"
 brew "stow"
+
+# macOS
+cask "karabiner-elements"
