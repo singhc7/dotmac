@@ -13,6 +13,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Homebrew package manager
 export PATH="$HOME/homebrew/bin:$PATH"
 
+# Injects ca-certificates for node
+export NODE_EXTRA_CA_CERTS="$(brew --prefix)/etc/ca-certificates/cert.pem"
+
 # --- NNN Configuration ---
 # Plugins: These all are just scripts stored inside ~/.config/nnn/plugins/ dir
 # p: preview-tui
