@@ -10,12 +10,6 @@ export VISUAL='nvim'
 # User local bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Homebrew package manager
-export PATH="$HOME/homebrew/bin:$PATH"
-
-# Injects ca-certificates for node
-export NODE_EXTRA_CA_CERTS="$(brew --prefix)/etc/ca-certificates/cert.pem"
-
 # --- NNN Configuration ---
 # Plugins: These all are just scripts stored inside ~/.config/nnn/plugins/ dir
 # p: preview-tui
@@ -52,6 +46,3 @@ if command -v bat >/dev/null 2>&1; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     export MANROFFOPT="-c"
 fi
-
-# --- Homebrew ---
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
