@@ -30,6 +30,8 @@ gh/hosts.yml
 .viminfo
 .zsh_plugins.zsh
 *.bak
+*.zcompdump
+*.zsh_sessions
 
 # =========================
 # Tool Specific Caches
