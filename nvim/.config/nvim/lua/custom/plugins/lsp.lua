@@ -115,6 +115,7 @@ return {
 				jsonls = {},
 				marksman = {},
 				taplo = {},
+				nil_ls = {},
 				clangd = {
 					-- Allow attaching to single files by falling back to current directory
 					root_markers = { ".git", "compile_commands.json", "compile_flags.txt", "." },
@@ -162,6 +163,7 @@ return {
 				"shfmt",
 				"google-java-format",
 				"clang-format",
+				"nixpkgs-fmt",
 				"jq",
 				"prettier",
 			}
