@@ -42,10 +42,7 @@ for config in functions aliases; do
 done
 
 # ==========================================
-# Powerlevel10k Theme + Configuration
-# Loaded after exports.zsh so $PATH includes Homebrew's bin.
+# Powerlevel10k Configuration
 # ==========================================
-P10K_THEME="$(brew --prefix 2>/dev/null)/share/powerlevel10k/powerlevel10k.zsh-theme"
-[[ -r "$P10K_THEME" ]] && source "$P10K_THEME"
-unset P10K_THEME
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
