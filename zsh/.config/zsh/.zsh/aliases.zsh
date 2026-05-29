@@ -7,11 +7,6 @@ if command -v nvim >/dev/null 2>&1; then
     alias vim=nvim
 fi
 
-# --- Updates (Homebrew) ---
-if command -v brew >/dev/null 2>&1; then
-    alias upsystem='brew update && brew upgrade'
-fi
-
 # --- Eza (Modern replacement for ls) ---
 if command -v eza >/dev/null 2>&1; then
     alias ls='eza --icons --group-directories-first'
