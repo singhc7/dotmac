@@ -1,8 +1,6 @@
----
 # Pre-commit configuration for dotfiles
 # To install: pre-commit install
 # To run on all files: pre-commit run --all-files
-
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -13,9 +11,15 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: detect-private-key
-
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.38.0
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.21.0
     hooks:
-      - id: yamllint
-        args: ["--strict"]
+      - id: yamlfmt
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
