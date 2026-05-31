@@ -163,7 +163,6 @@ return {
 				"shfmt",
 				"google-java-format",
 				"clang-format",
-				"nixpkgs-fmt",
 				"jq",
 				"prettier",
 			}

@@ -41,7 +41,7 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				toml = { "taplo" },
-				nix = { "nixpkgs_fmt" },
+				nix = { "nixfmt" },
 			},
 		},
 	},
