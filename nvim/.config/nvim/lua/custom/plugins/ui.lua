@@ -35,49 +35,6 @@ return {
 		opts = { signs = false },
 	},
 
-	-- nice bar at the bottom
-	{
-		"itchyny/lightline.vim",
-		lazy = false, -- also load at start since it's UI
-		config = function()
-			-- no need to also show mode in cmd line when we have bar
-			vim.o.showmode = false
-			vim.g.lightline = {
-				colorscheme = "one",
-				active = {
-					left = {
-						{ "mode", "paste" },
-						{ "readonly", "filename", "modified" },
-					},
-					right = {
-						{ "lineinfo" },
-						{ "percent" },
-						{ "fileencoding", "filetype" },
-					},
-				},
-				component_function = {
-					filename = "LightlineFilename",
-				},
-			}
-			function _G.LightlineFilenameInLua(opts)
-				if vim.fn.expand("%:t") == "" then
-					return "[No Name]"
-				else
-					return vim.fn.getreg("%")
-				end
-			end
-			-- https://github.com/itchyny/lightline.vim/issues/657
-			vim.api.nvim_exec(
-				[[
-				function! g:LightlineFilename()
-					return v:lua.LightlineFilenameInLua()
-				endfunction
-				]],
-				true
-			)
-		end,
-	},
-
 	{ -- Collection of various small independent plugins/modules
 		"nvim-mini/mini.nvim",
 		config = function()
@@ -86,6 +43,26 @@ return {
 
 			-- Add/delete/replace surroundings
 			require("mini.surround").setup()
+
+			-- Auto-pairs (replaces nvim-autopairs; same plugin family)
+			require("mini.pairs").setup()
+
+			-- Statusline (replaces Lightline; same plugin family as the rest)
+			require("mini.statusline").setup({ use_icons = vim.g.have_nerd_font })
+
+			-- VS Code Statusline Overrides
+			-- Mode Indicators
+			vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#ffffff", bg = "#007acc", bold = true }) -- VS Code Blue
+			vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert", { fg = "#ffffff", bg = "#cc6633", bold = true }) -- VS Code Orange
+			vim.api.nvim_set_hl(0, "MiniStatuslineModeVisual", { fg = "#ffffff", bg = "#68217a", bold = true }) -- VS Code Purple
+			vim.api.nvim_set_hl(0, "MiniStatuslineModeReplace", { fg = "#ffffff", bg = "#c586c0", bold = true })
+			vim.api.nvim_set_hl(0, "MiniStatuslineModeCommand", { fg = "#ffffff", bg = "#007acc", bold = true })
+
+			-- Base Sections
+			vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { fg = "#cccccc", bg = "#2d2d2d" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { fg = "#ffffff", bg = "#1e1e1e" }) -- Main editor background
+			vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { fg = "#cccccc", bg = "#2d2d2d" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { fg = "#858585", bg = "#1e1e1e" })
 		end,
 	},
 }
