@@ -67,8 +67,3 @@ alias path='echo $PATH | tr ":" "\n"'
 alias ports='lsof -iTCP -sTCP:LISTEN -n -P'
 alias ip='curl -s ifconfig.me'
 alias weather='curl -s wttr.in'
-
-# --- ssh & mosh ---
-# This passes it the built in Apple ssh
-# binary so it can use Apple's keychain
-alias msh="mosh --ssh=\"/usr/bin/ssh\""
