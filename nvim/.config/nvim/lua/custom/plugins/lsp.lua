@@ -158,7 +158,6 @@ return {
         "stylua",
         "shellcheck",
         "clang-format",
-        "jq",
         "beautysh",
         "markdownlint",
         "checkstyle",

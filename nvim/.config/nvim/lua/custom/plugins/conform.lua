@@ -37,7 +37,7 @@ return {
         c = { "clang-format" },
         cpp = { "clang-format" },
         java = { "clang-format" },
-        json = { "jq" },
+        json = { "clang-format" },
         yaml = { "yamlfmt" },
         markdown = { "markdownlint" },
         toml = { "taplo" },
