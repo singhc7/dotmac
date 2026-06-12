@@ -26,17 +26,21 @@ fi
 # ==========================================
 # 2. Key Bindings & Completion
 # ==========================================
-# Attempt to load shell integrations from common locations
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Fedora/Debian/Arch common locations
-    [[ -f /usr/share/fzf/shell/key-bindings.zsh ]] && source /usr/share/fzf/shell/key-bindings.zsh
-    [[ -f /usr/share/fzf/shell/completion.zsh ]] && source /usr/share/fzf/shell/completion.zsh
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # Homebrew location (derive prefix from binary path to avoid slow brew --prefix)
-    if (( $+commands[brew] )); then
-        BREW_PREFIX="${commands[brew]:h:h}"
-        [[ -f "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh" ]] && source "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
-        [[ -f "$BREW_PREFIX/opt/fzf/shell/completion.zsh" ]] && source "$BREW_PREFIX/opt/fzf/shell/completion.zsh"
+# Attempt to load shell integrations from Nix System Profile
+# shellcheck disable=SC2154
+if (( $+commands[fzf] )); then
+    # LSP Fix 1: Extract to a temporary variable to avoid nested expansion warnings
+    FZF_BIN="${commands[fzf]}"
+
+    # Apply modifiers to the flat variable
+    NIX_STORE_FZF="${FZF_BIN:A:h:h}/share/fzf"
+
+    if [[ -d "$NIX_STORE_FZF" ]]; then
+        # LSP Fix 2: Tell ShellCheck to ignore dynamic source paths it can't statically verify
+        # shellcheck disable=SC1091
+        source "$NIX_STORE_FZF/key-bindings.zsh"
+        # shellcheck disable=SC1091
+        source "$NIX_STORE_FZF/completion.zsh"
     fi
 fi
 
@@ -47,49 +51,44 @@ fi
 # fe [QUERY] - Edit the selected file with default editor (nvim)
 # Supports multi-selection
 fe() {
-  local files
-  IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
-}
-
-# fh - search through shell history and put selection on command line
-fh() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -rl 1 || history) | fzf +s --tac | sed 's/^[ ]*[0-9]*[ ]*//')
+    local files
+    IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
+    [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
 
 # fps - list processes and kill selected (multi-select supported)
 fps() {
-  local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
-  if [ -n "$pid" ]; then
-    echo $pid | xargs kill -${1:-9}
-  fi
+    if [ -n "$pid" ]; then
+        echo $pid | xargs kill -${1:-9}
+    fi
 }
 
 # fgitlog - browse git log and copy selected hash to clipboard
 fgl() {
-  local commits
-  commits=$(git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | \
-    fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-        --header 'CTRL-S toggle sort | ENTER copies hash' \
-        --preview 'git show --color=always $(echo {} | grep -o "[a-f0-9]\{7\}" | head -1)' \
+    local commits
+    commits=$(git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | \
+            fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+            --header 'CTRL-S toggle sort | ENTER copies hash' \
+            --preview 'git show --color=always $(echo {} | grep -o "[a-f0-9]\{7\}" | head -1)' \
         --preview-window=right:60%)
-  if [ -n "$commits" ]; then
-    local commit=$(echo "$commits" | grep -o "[a-f0-9]\{7\}" | head -1)
-    echo "$commit" | tr -d '\n' | pbcopy
-    echo "Copied $commit to clipboard"
-  fi
+    if [ -n "$commits" ]; then
+        local commit=$(echo "$commits" | grep -o "[a-f0-9]\{7\}" | head -1)
+        echo "$commit" | tr -d '\n' | pbcopy
+        echo "Copied $commit to clipboard"
+    fi
 }
 
 # fgb - fuzzy switch git branch
 fgb() {
-  local branch
-  branch=$(git branch --all --sort=-committerdate --format='%(refname:short)' | \
-    fzf --reverse --preview 'git log --oneline --graph --color=always -20 {1}' \
+    local branch
+    branch=$(git branch --all --sort=-committerdate --format='%(refname:short)' | \
+            fzf --reverse --preview 'git log --oneline --graph --color=always -20 {1}' \
         --header 'Switch branch')
-  if [ -n "$branch" ]; then
-    # Strip remotes/origin/ prefix for remote branches
-    git checkout "${branch#remotes/origin/}"
-  fi
+    if [ -n "$branch" ]; then
+        # Strip remotes/origin/ prefix for remote branches
+        git checkout "${branch#remotes/origin/}"
+    fi
 }
